@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="w-50 d-flex justify-content-center">
+<div class="w-50 d-flex justify-content-center mt-4">
 	<div class="col-7">
+		<div class="d-flex justify-content-center text-success">
+			<h1>YOUniform</h1>
+		</div>
 		<form id="signInForm" method="post" action="/user/sign-in">
 			<div class="pt-4">
 				<label for="loginId">아이디</label> 
@@ -44,7 +47,7 @@
 			$.post(url, params)
 			.done(function(data) {
 				if (data.result == "성공") {
-					location.href = "/post/post-list-view";
+					location.href = "/home/home-view";
 				} else {
 					alert(data.error_message);
 				}

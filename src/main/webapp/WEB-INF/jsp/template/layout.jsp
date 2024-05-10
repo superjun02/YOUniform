@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +26,12 @@
 </head>
 <body>
 	<div class="container">
-		<header>
-			<jsp:include page="../include/header.jsp" />
-		</header>
+		<c:if test="${fn:startsWith(viewName, 'user') ne true}">
+			<header>
+				<jsp:include page="../include/header.jsp" />
+			</header>
+		</c:if>
+		
 		<section class="contents d-flex justify-content-center">
 			<jsp:include page="../${viewName}.jsp" />
 		</section>
