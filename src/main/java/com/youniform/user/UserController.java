@@ -23,7 +23,7 @@ public class UserController {
 		session.removeAttribute("name");
 		session.removeAttribute("loginId");
 		
-		return "redirect:/user/sign-in-view";
+		return "redirect:/home/home-view";
 	}
 	
 	@GetMapping("/sign-up-view")
