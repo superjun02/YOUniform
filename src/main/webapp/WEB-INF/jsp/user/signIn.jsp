@@ -20,3 +20,35 @@
 		</form>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		$('form').on('submit', function(e) {
+			e.preventDefault();
+			
+			let loginId = $('#loginId').val().trim();
+			let password = $('#password').val().trim();
+			
+			if (!loginId) {
+				alert("아이디를 입력해주세요");
+				return false;
+			}
+			
+			if (!password) {
+				alert("패스워드를 입력해주세요")
+				return false;
+			}
+			
+			let url = $(this).attr('action');
+			let params = $(this).serialize();
+			
+			$.post(url, params)
+			.done(function(data) {
+				if (data.result == "성공") {
+					location.href = "/post/post-list-view";
+				} else {
+					alert(data.error_message);
+				}
+			});
+		});
+	});
+</script>
