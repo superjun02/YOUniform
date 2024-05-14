@@ -35,7 +35,9 @@
 		
 		<section class="contents d-flex justify-content-center">
 			<div class="left-side"></div>
-			<jsp:include page="../${viewName}.jsp" />
+			<div class="home mt-3">
+				<jsp:include page="../${viewName}.jsp" />
+			</div>
 			<div class="right-side d-flex justify-content-end">
 				<c:if test="${fn:startsWith(viewName, 'user') ne true and !empty loginId}">
 					<jsp:include page="../include/sideNav.jsp" />

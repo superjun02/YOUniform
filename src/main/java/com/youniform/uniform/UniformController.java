@@ -1,28 +1,28 @@
-package com.youniform.home;
-
-import java.util.List;
+package com.youniform.uniform;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.youniform.uniform.bo.UniformBO;
 import com.youniform.uniform.domain.Uniform;
 
-@RequestMapping("/home")
+@RequestMapping("/uniform")
 @Controller
-public class HomeController {
+public class UniformController {
 	@Autowired
 	private UniformBO uniformBO;
 	
-	@GetMapping("/home-view")
-	public String homeView(Model model) {
-		model.addAttribute("viewName", "home/home");
+	@GetMapping("/detail-view")
+	public String homeView(Model model,
+			@RequestParam("id") int id) {
+		model.addAttribute("viewName", "uniform/detail");
 		
-		List<Uniform> uniformList = uniformBO.getUniformList();
-		model.addAttribute("uniformList", uniformList);
+		Uniform uniform = uniformBO.getUniformById(id);
+		model.addAttribute("uniform", uniform);
 		return "template/layout";
 	}
 }

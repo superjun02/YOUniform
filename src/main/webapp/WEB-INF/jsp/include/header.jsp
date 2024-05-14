@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="d-flex justify-content-between align-items-center h-100">
 	<%-- logo --%>
-	<div class="pl-3 text-success col-3">
-		<h1>YOUniform</h1>
+	<div class="pl-3 col-3">
+		<a href="/home/home-view" class="text-decoration-none text-success"><h1>YOUniform</h1></a>
 	</div>
-	<div>
+	<div class="col-5">
 		<div class="d-flex">
 			<input class="form-control" type="search" placeholder="제품 입력">
    	 		<button id="searchBtn" class="btn btn-outline-success" type="button">search</button>

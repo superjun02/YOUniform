@@ -19,6 +19,33 @@ header {
 .home {
 	width: 780px;
 }
+.uniformBox {
+	width: 130px;
+	display: flex;
+	justify-content: center;
+}
+.itemLink {
+	text-decoration: none;
+	color: black;
+}
+.subjectText {
+	font-size: 12px;
+	width: 110px;
+	text-align: center;
+}
+.detailSubjectText {
+	font-size: 20px;
+}
+.detailPriceText {
+	font-size: 18px;
+}
+.descriptionText {
+	font-size: 16px;
+}
+.priceText {
+	font-size: 10px;
+	text-align: center;
+}
 .right-side {
 	width: 165px;
 }
