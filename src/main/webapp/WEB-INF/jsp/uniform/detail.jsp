@@ -15,8 +15,8 @@
 		<div class="descriptionText mt-3">${uniform.description}</div>
 		<div class="statusText mt-4">상태: ${uniform.status}</div>
 		<div class="mt-5 d-flex">
-			<button id="basketBtn" class="w-50 btn btn-secondary" value="${uniform.id}">장바구니</button>
-			<button id="purchaseBtn" class="w-50 btn btn-primary" value="${uniform.id}">구매하기</button>
+			<button id="basketBtn" class="w-50 btn btn-secondary" value="${userId}">장바구니</button>
+			<button id="purchaseBtn" class="w-50 btn btn-primary" value="${userId}">구매하기</button>
 		</div>
 		<c:if test="${loginId eq 'admin'}">
 			<div>
@@ -27,6 +27,44 @@
 </div>
 <script>
 	$(document).ready(function() {
+		$('#purchaseBtn').on('click', function() {
+			let userId = $('#purchaseBtn').val();
+			if (!userId) {
+				alert("구매를 할려면 회원가입을 진행해주세요");
+				return;
+			}
+			location.href = "/order/purchase-view?uniformId=${uniform.id}";
+		});
 		
+		$('#basketBtn').on('click', function() {
+			let userId = $('#basketBtn').val();
+			if (!userId) {
+				alert("구매를 할려면 회원가입을 진행해주세요");
+				return;
+			}
+			location.href = "/order/basket-view?uniformId=${uniform.id}";
+		});
+		
+		$('#deleteBtn').on('click', function() {
+			let uniformId = $(this).val();
+			
+			$.ajax({
+				type : 'POST',
+				url : "/order/delete",
+				data : {
+					"uniformId" : uniformId
+				},
+				success : function(data) {
+					if (data.code == 200) {
+						location.reload(true);
+					} else {
+						alert(data.error_message);
+					}
+				},
+				error : function(e) {
+					alert("삭제를 하는데 실패했습니다.")
+				}
+			});
+		});
 	})
 </script>

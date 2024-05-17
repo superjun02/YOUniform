@@ -17,6 +17,8 @@
 			,`updatedAt`
 		FROM
 			`uniform`
+		WHERE
+			`confirm` = 'Y'
 		ORDER BY
 			`id`
 		DESC
