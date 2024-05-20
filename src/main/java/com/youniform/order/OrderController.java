@@ -17,7 +17,7 @@ public class OrderController {
 	private UniformBO uniformBO;
 	
 	@GetMapping("/purchase-view")
-	public String homeView(Model model,
+	public String purchaseView(Model model,
 			@RequestParam("uniformId") int id) {
 		model.addAttribute("viewName", "order/purchase");
 		
@@ -25,4 +25,5 @@ public class OrderController {
 		model.addAttribute("uniform", uniform);
 		return "template/layout";
 	}
+	
 }

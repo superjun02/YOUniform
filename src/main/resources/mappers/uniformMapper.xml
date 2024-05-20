@@ -41,4 +41,10 @@
 		WHERE
 			`id` = #{id}
  	</select>
+ 	<delete id="deleteUniformById">
+ 		DELETE FROM
+ 			`uniform`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  </mapper>

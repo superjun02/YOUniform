@@ -13,4 +13,6 @@ public interface UniformMapper {
 
 	public Uniform selectUniformById(int id);
 
+	public void deleteUniformById(int id);
+
 }

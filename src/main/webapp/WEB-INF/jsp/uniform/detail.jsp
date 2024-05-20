@@ -38,11 +38,30 @@
 		
 		$('#basketBtn').on('click', function() {
 			let userId = $('#basketBtn').val();
+			let uniformId = ${uniform.id};
 			if (!userId) {
 				alert("구매를 할려면 회원가입을 진행해주세요");
 				return;
 			}
-			location.href = "/order/basket-view?uniformId=${uniform.id}";
+			
+			$.ajax({
+				type : 'POST',
+				url : "/basket/add_basket",
+				data : {
+					"uniformId" : uniformId
+				},
+				success : function(data) {
+					if (data.code == 200) {
+						location.reload(true);
+						alert("장바구니에 추가되었습니다");
+					} else {
+						alert(data.error_message);
+					}
+				},
+				error : function(e) {
+					alert("추가 하는데 실패했습니다.")
+				}
+			});
 		});
 		
 		$('#deleteBtn').on('click', function() {
@@ -50,19 +69,20 @@
 			
 			$.ajax({
 				type : 'POST',
-				url : "/order/delete",
+				url : "/uniform/delete",
 				data : {
 					"uniformId" : uniformId
 				},
 				success : function(data) {
 					if (data.code == 200) {
-						location.reload(true);
+						alert("삭제를 하는데 성공했습니다.");
+						location.href="/home/home-view";
 					} else {
 						alert(data.error_message);
 					}
 				},
 				error : function(e) {
-					alert("삭제를 하는데 실패했습니다.")
+					alert("삭제를 하는데 실패했습니다.");
 				}
 			});
 		});
