@@ -41,4 +41,16 @@ public class OrderRestController {
 		return result;
 	}
 	
+	@PostMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("orderId") int orderId) {
+		Map<String, Object> result = new HashMap<>();
+		
+		orderBO.deleteOrderByOrderId(orderId);
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
+	
 }

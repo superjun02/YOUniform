@@ -16,4 +16,14 @@
  			,NOW()
  		)
  	</insert>
+ 	<select id="selectOrderItemListByOrderId" resultType="com.youniform.orderItem.domain.OrderItem">
+ 		SELECT
+ 			`orderId`
+ 			,`uniformId`
+ 			,`createdAt`
+ 		FROM
+ 			`order_item`
+ 		WHERE
+ 			`orderId` = #{orderId}
+ 	</select>
  </mapper>

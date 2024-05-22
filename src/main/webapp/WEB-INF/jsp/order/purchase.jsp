@@ -13,16 +13,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>${uniform.subject}</td>
-				<td>${uniform.price}원</td>
-			</tr>
+			<c:set var="totalPrice" value="0" />
+			<c:forEach items="${uniformList}" var="uniform" varStatus="status"> 
+				<tr>
+					<td>${status.count}</td>
+					<td>${uniform.subject}</td>
+					<td>${uniform.price}원</td>
+				</tr>
+				<c:set var="totalPrice" value="${totalPrice + uniform.price}" />
+			</c:forEach>
 		</tbody>
 	</table>
+	
 	<div class="d-flex justify-content-between">
 		<span>무통장입금 계좌번호: 하나은행 378-321321-3222</span>
-		<span>총액: ${uniform.price}원</span>
+		<span>총액: ${totalPrice}원</span>
 	</div>
 	<div class="mt-2">
 		<span>주소</span>
@@ -38,9 +43,13 @@
 	$(document).ready(function() {
 		$('.purchaseBtn').on('click', function() {
 			let address = $('#address').val().trim();
-			let uniformId = ${uniform.id};
-			let totalPrice = ${uniform.price};
+			let uniformId = ${uniformId};
+			let totalPrice = ${totalPrice};
 			
+			if (uniformId === 'null') {
+				uniformId = null;
+			}
+
 			if (!address) {
 				alert("주소를 입력해주세요");
 				return;

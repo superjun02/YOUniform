@@ -16,33 +16,56 @@
 				</div>
 				<div class="mt-2">${uniform.description}</div>
 			</div>
-			<div class="col-2 d-flex align-items-center">
+			<div class="col-2 d-flex align-items-center justify-content-end">
 				<button class="delBtn btn btn-danger" value="${uniform.id}">삭제</button>
 			</div>
 		</div>
 	</c:forEach>
+	<div class="mt-2">
+		<button id="purchaseBtn" class="btn btn-primary form-control">구매하기</button>
+	</div>
 </div>
 <script>
-	$('.delBtn').on('click', function() {
-		let uniformId = $(this).val();
-		
-		$.ajax({
-			type : 'POST',
-			url : "/basket/delete",
-			data : {
-				"uniformId" : uniformId
-			},
-			success : function(data) {
-				if (data.code == 200) {
-					alert("삭제를 하는데 성공했습니다.");
-					location.href="/home/home-view";
-				} else {
-					alert(data.error_message);
+	$(document).ready(function() {
+		$('.delBtn').on('click', function() {
+			let uniformId = $(this).val();
+			
+			$.ajax({
+				type : 'POST',
+				url : "/basket/delete",
+				data : {
+					"uniformId" : uniformId
+				},
+				success : function(data) {
+					if (data.code == 200) {
+						alert("삭제를 하는데 성공했습니다.");
+						location.reload();
+					} else {
+						alert(data.error_message);
+					}
+				},
+				error : function(e) {
+					alert("삭제를 하는데 실패했습니다.");
 				}
-			},
-			error : function(e) {
-				alert("삭제를 하는데 실패했습니다.");
-			}
+			});
+		});
+		
+		$('#purchaseBtn').on('click', function() {
+			
+			$.ajax({
+				type : 'POST',
+				url : "/basket/is_empty",
+				success : function(data) {
+					if (data.result) {
+						alert("장바구니가 비어있습니다.");
+					} else {
+						location.href="/order/purchase-view";
+					}
+				},
+				error : function(e) {
+					alert("장바구니 확인을 하는데 실패했습니다.");
+				}
+			});
 		});
 	});
 </script>

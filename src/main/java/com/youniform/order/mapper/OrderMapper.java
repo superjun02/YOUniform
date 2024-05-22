@@ -1,5 +1,7 @@
 package com.youniform.order.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,4 +18,8 @@ public interface OrderMapper {
 			@Param("address") String address);
 
 	public Order selectOrderByOrderNumber(String orderNumber);
+
+	public List<Order> selectOrderByUserId(Integer userId);
+
+	public void deleteOrderByOrderId(int orderId);
 }

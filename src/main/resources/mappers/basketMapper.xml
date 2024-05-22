@@ -25,6 +25,9 @@
 			`basket`
 		WHERE
 			`userId` = #{userId}
+		ORDER BY
+			`id`
+		DESC
  	</select>
  	<delete id="deleteBasketByUniformId">
  		DELETE FROM
@@ -41,5 +44,13 @@
  			`userId` = #{userId}
  		AND
  			`uniformId` = #{uniformId}
+ 	</select>
+ 	<select id="isBasketEmpty" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM	
+ 			`basket`
+ 		WHERE
+ 			`userId` = #{userId}
  	</select>
  </mapper>

@@ -13,7 +13,7 @@
 <c:if test="${loginId ne 'admin'}">
 	<ul class="nav flex-column fixed_box">
 		<li class="nav-item side-nav"><a class="nav-link text-white" href="/basket/basket-view">장바구니</a></li>
-		<li class="nav-item side-nav"><a class="nav-link text-white" href="#">주문내역</a></li>
+		<li class="nav-item side-nav"><a class="nav-link text-white" href="/order/order-list-view">주문내역</a></li>
 		<li class="nav-item side-nav"><a class="nav-link text-white" href="#">문의하기</a></li>
 		<li class="nav-item side-nav"><a class="nav-link text-white" href="#">문의내역</a></li>
 		<li class="nav-item side-nav"><a class="nav-link text-white" href="#">판매신청</a></li>

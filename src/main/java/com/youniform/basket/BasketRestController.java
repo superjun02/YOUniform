@@ -57,4 +57,21 @@ public class BasketRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/is_empty")
+	public Map<String, Object> isEmpty(HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		if (basketBO.isBasketEmpty(userId)) {
+			result.put("code", 200);
+			result.put("result", false);
+		} else {
+			result.put("code", 200);
+			result.put("result", true);
+		}
+		
+		return result;
+	}
 }

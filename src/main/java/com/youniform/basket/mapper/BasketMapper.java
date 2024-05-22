@@ -21,5 +21,7 @@ public interface BasketMapper {
 	public boolean selectBasketByUserIdAndUniformId(
 			@Param("userId") int userId,
 			@Param("uniformId") int uniformId);
+
+	public boolean isBasketEmpty(Integer userId);
 	
 }

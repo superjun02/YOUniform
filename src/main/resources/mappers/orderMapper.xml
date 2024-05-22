@@ -40,4 +40,29 @@
 		WHERE
 			`orderNumber` = #{orderNumber}
  	</select>
+ 	<select id="selectOrderByUserId" resultType="com.youniform.order.domain.Order">
+ 		SELECT
+ 			`id`
+ 			,`userId`
+			,`orderNumber`
+			,`payment`
+			,`totalPrice`
+			,`address`
+			,`status`
+			,`createdAt`
+			,`updatedAt`
+		FROM 
+			`order`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY
+			`id`
+		DESC
+ 	</select>
+ 	<delete id="deleteOrderByOrderId">
+ 		DELETE FROM
+ 			`order`
+ 		WHERE
+ 			`orderId` = #{orderId}
+ 	</delete>
  </mapper>
