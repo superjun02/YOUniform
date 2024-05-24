@@ -16,4 +16,6 @@ public interface OrderItemMapper {
 
 	public List<OrderItem> selectOrderItemListByOrderId(Integer userId);
 
+	public void deleteOrderItemByOrderId(int orderId);
+
 }

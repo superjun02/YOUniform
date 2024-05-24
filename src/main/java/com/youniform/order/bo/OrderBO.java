@@ -24,6 +24,7 @@ public class OrderBO {
 	
 	@Autowired
 	private BasketMapper basketMapper;
+	
 	public int addOrder(int userId, String address, Integer uniformId, int totalPrice) {
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -54,9 +55,12 @@ public class OrderBO {
 			return 1;
 		}
 	}
+	
 	public void deleteOrderByOrderId(int orderId) {
 		orderMapper.deleteOrderByOrderId(orderId);
+		orderItemMapper.deleteOrderItemByOrderId(orderId);
 	}
+	
 	public List<Order> getOrderListByUserId(Integer userId) {
 		return orderMapper.selectOrderByUserId(userId);
 	}

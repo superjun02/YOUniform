@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.youniform.basket.domain.Basket;
 import com.youniform.basket.mapper.BasketMapper;
@@ -55,6 +56,13 @@ public class UniformBO {
 		fileManager.deleteFile(uniform.getImage());
 		uniformMapper.deleteUniformById(id);
 		basketMapper.deleteBasketByUniformId(id);
+	}
+
+	public int addUniform(Integer userId, String loginId, String league, String subject, int price,
+			String description, MultipartFile file) {
+		String image = fileManager.saveFile(loginId, file);
+		
+		return uniformMapper.insertUniform(userId, league, subject, description, image, price);
 	}
 
 }

@@ -63,6 +63,6 @@
  		DELETE FROM
  			`order`
  		WHERE
- 			`orderId` = #{orderId}
+ 			`id` = #{orderId}
  	</delete>
  </mapper>

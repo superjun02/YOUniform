@@ -26,4 +26,10 @@
  		WHERE
  			`orderId` = #{orderId}
  	</select>
+ 	<delete id="deleteOrderItemByOrderId">
+ 		DELETE FROM 
+ 			`order_item`
+ 		WHERE
+ 			`orderId` = #{orderId}
+ 	</delete>
  </mapper>

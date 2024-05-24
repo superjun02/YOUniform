@@ -24,7 +24,7 @@
 					</td>
 					<td>
 						<c:if test="${order.status eq '주문 확인중'}">
-							<button class="delBtn btn btn-danger" value="${orderInfo.uniform.id}">주문취소</button>
+							<button class="delBtn btn btn-danger" value="${order.id}">주문취소</button>
 						</c:if>
 					</td>
 				</tr>
@@ -35,13 +35,13 @@
 <script>
 	$(document).ready(function() {
 		$('.delBtn').on('click', function() {
-			let uniformId = $(this).val();
+			let orderId = $(this).val();
 			
 			$.ajax({
 				type : 'POST',
 				url : "/order/delete",
 				data : {
-					"uniformId" : uniformId
+					"orderId" : orderId
 				},
 				success : function(data) {
 					if (data.code == 200) {

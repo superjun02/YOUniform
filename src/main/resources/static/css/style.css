@@ -63,3 +63,7 @@ header {
 footer {
 	height: 100px;
 }
+#imgBtn {
+	border: none;
+	background: transparent;
+}

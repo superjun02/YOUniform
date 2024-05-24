@@ -47,4 +47,29 @@
  		WHERE
  			`id` = #{id}
  	</delete>
+ 	<insert id="insertUniform" parameterType="map" useGeneratedKeys="true">
+ 		INSERT INTO
+ 			`uniform`
+ 		(
+ 			`userId`
+			,`league`
+			,`subject`
+			,`description`
+			,`image`
+			,`price`
+			,`createdAt`
+			,`updatedAt`	
+ 		) 
+ 		VALUE
+ 		(
+ 			#{userId}
+ 			,#{league}
+ 			,#{subject}
+ 			,#{description}
+ 			,#{image}
+ 			,#{price}
+ 			,NOW()
+ 			,NOW()
+ 		)
+ 	</insert>
  </mapper>
