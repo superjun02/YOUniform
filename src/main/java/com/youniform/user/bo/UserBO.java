@@ -11,6 +11,7 @@ import com.youniform.user.repository.UserRepository;
 public class UserBO {
 	@Autowired
 	private UserRepository userRepository;
+	
 	public UserEntity getUserEntityByLoginIdPassword(String loginId, String password) {
 		String hashedPassword = EncryptUtils.hashString(password);
 		
