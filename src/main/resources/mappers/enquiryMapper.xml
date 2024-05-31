@@ -14,8 +14,10 @@
 			,`updatedAt`
 		FROM 	
 			`enquiry`
+		<if test="userId != 1">
 		WHERE
 			`userId` = #{userId}
+		</if>
 		ORDER BY
 			`id`
 		DESC
@@ -34,8 +36,10 @@
 			`enquiry`
 		WHERE
 			`division` = #{division}
-		AND
-			`userId` = #{userId}
+		<if test="userId != 1">
+			AND
+				`userId` = #{userId}
+		</if>
 		ORDER BY
 			`id`
 		DESC
@@ -76,4 +80,18 @@
  			,NOW()
  		)
  	</insert>
+ 	<update id="updateEnquiryByAnswerAndId" useGeneratedKeys="true">
+ 		UPDATE
+ 			`enquiry`
+ 		SET
+ 			`answer` = #{answer}
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
+ 	<delete id="deleteEnquiryById" >
+ 		DELETE FROM	
+ 			`enquiry`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  </mapper>

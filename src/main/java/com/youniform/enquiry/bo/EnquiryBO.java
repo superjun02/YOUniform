@@ -14,4 +14,12 @@ public class EnquiryBO {
 		return enquiryMapper.insertEnquiry(userId, division, subject, description);
 	}
 
+	public int updateEnquiryByAnswerAndId(String answer, int id) {
+		return enquiryMapper.updateEnquiryByAnswerAndId(answer, id);
+	}
+
+	public void deleteEnquiryById(int id) {
+		enquiryMapper.deleteEnquiryById(id);
+	}
+
 }

@@ -52,8 +52,6 @@
 				type : 'POST',
 				url : "/enquiry/create",
 				data : formData,
-				processData : false,
-				contentType : false,
 				success : function(data) {
 					if (data.code == 200) {
 						alert("작성이 완료되었습니다");

@@ -67,3 +67,10 @@ footer {
 	border: none;
 	background: transparent;
 }
+#adminReplyBox {
+	border: 1px solid;
+	border-color: #CED4DA;
+}
+#content {
+	border: none;
+}

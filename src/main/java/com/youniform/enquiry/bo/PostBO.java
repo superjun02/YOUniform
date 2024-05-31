@@ -21,10 +21,11 @@ public class PostBO {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<Post> getPostList(String division, Integer userId) {
+	public List<Post> getPostListByUserId(String division, Integer userId) {
 		List<Post> postList = new ArrayList<>();
 		
 		List<Enquiry> enquiryList = new ArrayList<>();
+		
 		if (division == null) {
 			enquiryList = enquiryMapper.selectEnquiryListByUserId(userId);
 		} else {

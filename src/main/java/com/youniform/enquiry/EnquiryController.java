@@ -32,7 +32,7 @@ public class EnquiryController {
 			return "redirect:/home/home-view";
 		}
 		
-		List<Post> postlist = postBO.getPostList(division, userId);
+		List<Post> postlist = postBO.getPostListByUserId(division, userId);
 		
 		model.addAttribute("postList", postlist);
 		model.addAttribute("division", division);

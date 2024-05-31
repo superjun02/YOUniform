@@ -23,5 +23,11 @@ public interface EnquiryMapper {
 			@Param("division") String division,
 			@Param("subject") String subject,
 			@Param("description") String description);
+
+	public int updateEnquiryByAnswerAndId(
+			@Param("answer") String answer,
+			@Param("id") int id);
+
+	public void deleteEnquiryById(int id);
 	
 }

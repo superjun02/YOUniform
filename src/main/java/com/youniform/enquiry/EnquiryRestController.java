@@ -41,4 +41,36 @@ public class EnquiryRestController {
 		}
 		return result;
 	}
+	
+	@PostMapping("/add-reply")
+	public Map<String, Object> addReply(Model model,
+			HttpSession session,
+			@RequestParam("answer") String answer,
+			@RequestParam("id") int id) {
+		Map<String, Object> result = new HashMap<>();
+		
+		int columNum = enquiryBO.updateEnquiryByAnswerAndId(answer, id);
+		
+		if (columNum == 1) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 300);
+			result.put("error_message", "등록에 실패했습니다.");
+		}
+		return result;
+	}
+	
+	@PostMapping("/delete")
+	public Map<String, Object> delete(Model model,
+			HttpSession session,
+			@RequestParam("id") int id) {
+		Map<String, Object> result = new HashMap<>();
+		
+		enquiryBO.deleteEnquiryById(id);
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
 }
