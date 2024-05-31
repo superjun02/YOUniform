@@ -13,8 +13,8 @@
 	<table class="table text-center">
 		<thead>
 			<tr>
-				<th>번호</th>
-				<th>
+				<th class="col-1">번호</th>
+				<th class="col-1">
 					<select id="division" class="form-control-sm">
 						<option value="분류">분류</option>
 						<option value="배송문의" <c:if test="${division == '배송문의'}">selected</c:if>>배송문의</option>
@@ -23,9 +23,9 @@
 						<option value="기타문의" <c:if test="${division == '기타문의'}">selected</c:if>>기타문의</option>
 					</select>
 				</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>날짜</th>
+				<th class="col-6">제목</th>
+				<th class="col-2">작성자</th>
+				<th class="col-2">날짜</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,7 +33,12 @@
 				<tr class="clickable-row" data-href="/enquiry/enquiry-detail-view?id=${post.enquiry.id}&userId=${post.enquiry.userId}">
 					<td>${post.num}</td>
 					<td>${post.enquiry.division}</td>
-					<td>${post.enquiry.subject}</td>
+					<td>
+						${post.enquiry.subject}
+						<c:if test="${not empty post.enquiry.answer}">
+							<small class="text-secondary">답변완료</small>
+						</c:if>
+					</td>
 					<td>${post.userId}</td>
 					<td><fmt:formatDate value="${post.enquiry.createdAt}" pattern="yyyy-MM-dd" /></td>
 				</tr>
