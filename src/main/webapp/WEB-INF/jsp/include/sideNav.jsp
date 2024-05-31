@@ -4,9 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:if test="${loginId eq 'admin'}">
 	<ul class="nav flex-column fixed_box">
-		<li class="nav-item side-nav"><a class="nav-link text-white" href="#">주문내역</a></li>
+		<li class="nav-item side-nav"><a class="nav-link text-white" href="/order/order-list-view">주문내역</a></li>
 		<li class="nav-item side-nav"><a class="nav-link text-white" href="/enquiry/enquiry-list-view">문의내역</a></li>
-		<li class="nav-item side-nav"><a class="nav-link text-white" href="#">신청내역</a></li>
+		<li class="nav-item side-nav"><a class="nav-link text-white" href="/order/order-list-view">신청내역</a></li>
 		<li class="nav-item side-nav"><a class="nav-link text-white" href="#">판매하기</a></li>
 	</ul>
 </c:if>

@@ -19,7 +19,7 @@ public interface OrderMapper {
 
 	public Order selectOrderByOrderNumber(String orderNumber);
 
-	public List<Order> selectOrderByUserId(Integer userId);
-
+	public List<Order> selectOrderListByUserId(Integer userId);
+	
 	public void deleteOrderByOrderId(int orderId);
 }

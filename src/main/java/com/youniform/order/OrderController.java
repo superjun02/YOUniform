@@ -76,4 +76,21 @@ public class OrderController {
 		model.addAttribute("orderList", orderList);
 		return "template/layout";
 	}
+	
+	@GetMapping("/order-detail-view")
+	public String enquiryDetailView(Model model,
+			HttpSession session,
+			@RequestParam("id") int id,
+			@RequestParam("userId") int userId) {
+		Integer sessionId = (Integer) session.getAttribute("userId");
+
+		if (sessionId != 1 && (sessionId == null || userId != sessionId)) {
+			return "redirect:/home/home-view";
+		}
+		
+		List<Uniform> uniformList = uniformBO.getUniformListById(id);
+		model.addAttribute("uniformList", uniformList);
+		model.addAttribute("viewName", "order/orderDetail");
+		return "template/layout";
+	}
 }

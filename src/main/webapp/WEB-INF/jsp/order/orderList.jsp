@@ -15,7 +15,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${orderList}" var="order" varStatus="status"> 
-				<tr>
+				<tr class="clickable-row" data-href="/order/order-detail-view?id=${order.id}&userId=${order.userId}">
 					<td>${order.orderNumber}</td>
 					<td>${order.status}</td>
 					<td>${order.totalPrice}원</td>
@@ -23,7 +23,7 @@
 						<fmt:formatDate value="${order.createdAt}" pattern="yyyy년 MM월 dd일 HH시 mm분" /><br>
 					</td>
 					<td>
-						<c:if test="${order.status eq '주문 확인중'}">
+						<c:if test="${order.status eq '주문 확인중' or loginId eq 'admin'}">
 							<button class="delBtn btn btn-danger" value="${order.id}">주문취소</button>
 						</c:if>
 					</td>
@@ -55,6 +55,10 @@
 					alert("삭제를 하는데 실패했습니다.");
 				}
 			});
+		});
+		
+		$('.clickable-row').on('click', function() {
+			location.href = this.dataset.href;
 		});
 	});
 </script>

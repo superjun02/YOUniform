@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.youniform.basket.domain.Basket;
 import com.youniform.basket.mapper.BasketMapper;
 import com.youniform.common.FileManagerService;
+import com.youniform.orderItem.domain.OrderItem;
+import com.youniform.orderItem.mapper.OrderItemMapper;
 import com.youniform.uniform.domain.Uniform;
 import com.youniform.uniform.mapper.UniformMapper;
 
@@ -21,6 +23,9 @@ public class UniformBO {
 	
 	@Autowired
 	private BasketMapper basketMapper;
+	
+	@Autowired
+	private OrderItemMapper orderItemMapper;
 	
 	@Autowired
 	private FileManagerService fileManager; 
@@ -63,6 +68,23 @@ public class UniformBO {
 		String image = fileManager.saveFile(loginId, file);
 		
 		return uniformMapper.insertUniform(userId, league, subject, description, image, price);
+	}
+
+	public List<Uniform> getUniformListById(int id) {
+		List<OrderItem> orderItemList = orderItemMapper.selectOrderItemListByOrderId(id);
+		
+		List<Uniform> uniformList = new ArrayList<>();
+		
+		Iterator<OrderItem> iter = orderItemList.iterator();
+		
+		while (iter.hasNext()) {
+			OrderItem data = iter.next();
+			
+			Uniform uniform = uniformMapper.selectUniformById(data.getUniformId());
+			
+			uniformList.add(uniform);
+		}
+		return uniformList;
 	}
 
 }

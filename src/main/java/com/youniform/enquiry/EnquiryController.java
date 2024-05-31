@@ -43,11 +43,12 @@ public class EnquiryController {
 	@GetMapping("/enquiry-detail-view")
 	public String enquiryDetailView(Model model,
 			HttpSession session,
-			@RequestParam("id") int id) {
-		Integer userId = (Integer) session.getAttribute("userId");
+			@RequestParam("id") int id,
+			@RequestParam("userId") int userId) {
+		Integer sessionId = (Integer) session.getAttribute("userId");
 
-		if (userId == null) {
-			return "redirect:/home/home-view";
+		if (sessionId != 1 && (sessionId == null || userId != sessionId)) {
+		    return "redirect:/home/home-view";
 		}
 		
 		Post post = postBO.getPostById(id);
