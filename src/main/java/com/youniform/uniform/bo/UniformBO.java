@@ -64,10 +64,17 @@ public class UniformBO {
 	}
 
 	public int addUniform(Integer userId, String loginId, String league, String subject, int price,
-			String description, MultipartFile file) {
+			String description, MultipartFile file, String status) {
 		String image = fileManager.saveFile(loginId, file);
+		String confirm = null;
 		
-		return uniformMapper.insertUniform(userId, league, subject, description, image, price);
+		if (userId == 1) {
+			confirm = "Y";
+		} else {
+			confirm = "N";
+		}
+		
+		return uniformMapper.insertUniform(userId, league, subject, description, image, price, status, confirm);
 	}
 
 	public List<Uniform> getUniformListById(int id) {
@@ -85,6 +92,11 @@ public class UniformBO {
 			uniformList.add(uniform);
 		}
 		return uniformList;
+	}
+
+	public void updateUniformById(int id, String league, String subject, String description, int price, String status) {
+		String confirm = "Y";
+		uniformMapper.updateUniformById(id, league, subject, description, price, status, confirm);
 	}
 
 }

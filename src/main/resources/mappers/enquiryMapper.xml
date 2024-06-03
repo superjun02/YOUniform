@@ -85,6 +85,7 @@
  			`enquiry`
  		SET
  			`answer` = #{answer}
+ 			,`updatedAt` = NOW()
  		WHERE
  			`id` = #{id}
  	</update>

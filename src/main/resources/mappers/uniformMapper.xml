@@ -57,6 +57,8 @@
 			,`description`
 			,`image`
 			,`price`
+			,`status`
+			,`confirm`
 			,`createdAt`
 			,`updatedAt`	
  		) 
@@ -68,8 +70,45 @@
  			,#{description}
  			,#{image}
  			,#{price}
+ 			,#{status}
+ 			,#{confirm}
  			,NOW()
  			,NOW()
  		)
  	</insert>
+ 	<select id="selectUniformRequestList" resultType="com.youniform.uniform.domain.Uniform">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`league`
+			,`subject`
+			,`description`
+			,`image`
+			,`price`
+			,`status`
+			,`confirm`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`uniform`
+		WHERE
+			`confirm` = 'N'
+		ORDER BY
+			`id`
+		DESC
+ 	</select>
+ 	<update id="updateUniformById">
+ 		UPDATE
+ 			`uniform`
+ 		SET
+ 			`league` = #{league}
+ 			,`subject` = #{subject}
+ 			,`description` = #{description}
+ 			,`price` = #{price}
+ 			,`status` = #{status}
+ 			,`confirm` = #{confirm}
+ 			,`updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
  </mapper>

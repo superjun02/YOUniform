@@ -38,13 +38,14 @@ public class UniformRestController {
 			@RequestParam("price") int price,
 			@RequestParam("description")  String description,
 			@RequestParam("file") MultipartFile file,
+			@RequestParam("status") String status,
 			HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		
 		Integer userId = (Integer) session.getAttribute("userId");
 		String loginId = (String) session.getAttribute("loginId");
 		
-		Integer colNum = uniformBO.addUniform(userId, loginId, league, subject, price, description, file);
+		Integer colNum = uniformBO.addUniform(userId, loginId, league, subject, price, description, file, status);
 		
 		if (colNum == 1) {
 			result.put("code", 200);
@@ -54,6 +55,24 @@ public class UniformRestController {
 			result.put("error_message", "매모가 저장되지 않았습니다.");
 		}
 
+		return result;
+	}
+	
+	@PostMapping("/accept")
+	public Map<String, Object> accept(
+			@RequestParam("league") String league,
+			@RequestParam("subject") String subject,
+			@RequestParam("price") int price,
+			@RequestParam("description")  String description,
+			@RequestParam("status") String status,
+			@RequestParam("id") int id,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		
+		uniformBO.updateUniformById(id, league, subject, description, price, status);
+		result.put("code", 200);
+		result.put("result", "성공");
+		
 		return result;
 	}
 }

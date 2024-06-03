@@ -8,18 +8,21 @@
 		<img alt="" src="${uniform.image}" width="390px" height="496px">
 	</div>
 	<div class="w-50 mx-2">
+		<div>${uniform.league}</div>
 		<div class="detailSubjectText">${uniform.subject}</div>
 		<div class="detailPriceText mt-1">
 			<fmt:formatNumber value="${uniform.price}" type="currency" />
 		</div>
 		<div class="descriptionText mt-3">${uniform.description}</div>
 		<div class="statusText mt-4">상태: ${uniform.status}</div>
-		<div class="mt-5 d-flex">
-			<button id="basketBtn" class="w-50 btn btn-secondary" value="${userId}">장바구니</button>
-			<button id="purchaseBtn" class="w-50 btn btn-primary" value="${userId}">구매하기</button>
-		</div>
+		<c:if test="${loginId ne 'admin'}">
+			<div class="mt-5 d-flex">
+				<button id="basketBtn" class="w-50 btn btn-secondary" value="${userId}">장바구니</button>
+				<button id="purchaseBtn" class="w-50 btn btn-primary" value="${userId}">구매하기</button>
+			</div>
+		</c:if>
 		<c:if test="${loginId eq 'admin'}">
-			<div>
+			<div class="mt-5">
 				<button id="deleteBtn" class="w-100 btn btn-danger" value="${uniform.id}">삭제하기</button>
 			</div>
 		</c:if>

@@ -22,6 +22,19 @@ public interface UniformMapper {
 			@Param("subject") String subject,
 			@Param("description") String description,
 			@Param("image") String image,
-			@Param("price") int price);
+			@Param("price") int price,
+			@Param("status") String status,
+			@Param("confirm") String confirm);
+
+	public List<Uniform> selectUniformRequestList();
+
+	public void updateUniformById(
+			@Param("id") int id,
+			@Param("league") String league,
+			@Param("subject") String subject,
+			@Param("description") String description,
+			@Param("price") int price,
+			@Param("status") String status,
+			@Param("confirm") String confirm);
 
 }

@@ -4,7 +4,7 @@
 	<ul class="nav justify-content-center">
 		<li class="nav-item top-nav"><a class="nav-link top-nav-link text-white" href="#">K-league</a></li>
 		<li class="nav-item top-nav"><a class="nav-link top-nav-link text-white" href="#">Serie A</a></li>
-		<li class="nav-item top-nav"><a class="nav-link top-nav-link text-white" href="#">Laliga</a></li>
+		<li class="nav-item top-nav"><a class="nav-link top-nav-link text-white" href="#">LaLiga</a></li>
 		<li class="nav-item top-nav"><a class="nav-link top-nav-link text-white" href="#">EPL</a></li>
 		<li class="nav-item top-nav"><a class="nav-link top-nav-link text-white" href="#">Ligue 1</a></li>
 		<li class="nav-item top-nav"><a class="nav-link top-nav-link text-white" href="#">Bundesliga</a></li>
