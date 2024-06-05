@@ -65,4 +65,12 @@ public class OrderBO {
 		return orderMapper.selectOrderListByUserId(userId);
 	}
 
+	public Order getOrderById(int id) {
+		return orderMapper.selectOrderById(id);
+	}
+
+	public void updateOrderByIdAndStatus(int id, String status) {
+		orderMapper.updateOrderByIdAndStatus(id, status);
+	}
+
 }

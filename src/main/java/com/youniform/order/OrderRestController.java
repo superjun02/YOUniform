@@ -53,4 +53,16 @@ public class OrderRestController {
 		return result;
 	}
 	
+	@PostMapping("/update-status")
+	public Map<String, Object> updateStatus(
+			@RequestParam("status") String status,
+			@RequestParam("orderId") int id) {
+		Map<String, Object> result = new HashMap<>();
+		
+		orderBO.updateOrderByIdAndStatus(id, status);
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
 }

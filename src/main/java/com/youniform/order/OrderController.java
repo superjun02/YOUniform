@@ -89,7 +89,11 @@ public class OrderController {
 		}
 		
 		List<Uniform> uniformList = uniformBO.getUniformListById(id);
+		Order order = orderBO.getOrderById(id);
+		
 		model.addAttribute("uniformList", uniformList);
+		model.addAttribute("status", order.getStatus());
+		model.addAttribute("orderId", order.getId());
 		model.addAttribute("viewName", "order/orderDetail");
 		return "template/layout";
 	}

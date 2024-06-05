@@ -67,4 +67,29 @@
  		WHERE
  			`id` = #{orderId}
  	</delete>
+ 	<select id="selectOrderById">
+ 		SELECT
+ 			`id`
+ 			,`userId`
+			,`orderNumber`
+			,`payment`
+			,`totalPrice`
+			,`address`
+			,`status`
+			,`createdAt`
+			,`updatedAt`
+		FROM 
+			`order`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ 	<update id="updateOrderByIdAndStatus" parameterType="map">
+ 		UPDATE
+ 			`order`
+ 		SET
+ 			`status` = #{status}
+ 			,`updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
  </mapper>

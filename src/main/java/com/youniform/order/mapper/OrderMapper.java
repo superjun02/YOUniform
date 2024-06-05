@@ -22,4 +22,10 @@ public interface OrderMapper {
 	public List<Order> selectOrderListByUserId(Integer userId);
 	
 	public void deleteOrderByOrderId(int orderId);
+
+	public Order selectOrderById(int id);
+
+	public void updateOrderByIdAndStatus(
+			@Param("id") int id,
+			@Param("status") String status);
 }
