@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.youniform.common.TelegramService;
 import com.youniform.uniform.bo.UniformBO;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +20,9 @@ import jakarta.servlet.http.HttpSession;
 public class UniformRestController {
 	@Autowired
 	private UniformBO uniformBO;
+	
+	@Autowired
+	private TelegramService telegramService;
 	
 	@PostMapping("/delete") 
 	public Map<String, Object> delete(
@@ -48,6 +52,7 @@ public class UniformRestController {
 		Integer colNum = uniformBO.addUniform(userId, loginId, league, subject, price, description, file, status);
 		
 		if (colNum == 1) {
+			telegramService.sendMessage("-4249005507", loginId + "님의 판매신청이 들어왔습니다. 확인 후 부탁드립니다.");
 			result.put("code", 200);
 			result.put("result", "성공");
 		} else {
