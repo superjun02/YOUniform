@@ -111,4 +111,27 @@
  		WHERE
  			`id` = #{id}
  	</update>
+ 	<select id="selectUniformListByLeague">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`league`
+			,`subject`
+			,`description`
+			,`image`
+			,`price`
+			,`status`
+			,`confirm`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`uniform`
+		WHERE
+			`confirm` = 'Y'
+		AND
+			`league` = #{league}
+		ORDER BY
+			`id`
+		DESC
+ 	</select>
  </mapper>

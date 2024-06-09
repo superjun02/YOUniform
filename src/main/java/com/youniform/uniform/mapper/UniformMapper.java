@@ -37,4 +37,6 @@ public interface UniformMapper {
 			@Param("status") String status,
 			@Param("confirm") String confirm);
 
+	public List<Uniform> selectUniformListByLeague(String league);
+
 }

@@ -8,7 +8,7 @@
 	</div>
 	<div class="col-5">
 		<div class="d-flex">
-			<input class="form-control" type="search" placeholder="제품 입력">
+			<input class="form-control" id="keyword" type="search" placeholder="제품 입력">
    	 		<button id="searchBtn" class="btn btn-outline-success" type="button">search</button>
 		</div>
 	</div>
@@ -24,3 +24,17 @@
 		</c:if>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		$('#searchBtn').on('click', function() {
+			let keyword = $('#keyword').val().trim();
+			
+			if (!keyword) {
+				alert("검색어를 입력해주세요");
+				return;
+			}
+		
+			location.href = "/uniform/search-list-view?keyword=" + keyword;
+		});
+	});
+</script>

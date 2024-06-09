@@ -82,4 +82,26 @@ public class UniformController {
 		model.addAttribute("uniform", uniform);
 		return "template/layout";
 	}
+	
+	@GetMapping("search-list-view")
+	public String searchListView(Model model,
+			HttpSession session,
+			@RequestParam("keyword") String keyword) {
+		model.addAttribute("viewName", "home/home");
+		
+		List<Uniform> uniformList = uniformBO.getUniformListBySearch(keyword);
+		model.addAttribute("uniformList", uniformList);
+		return "template/layout";
+	}
+	
+	@GetMapping("sort-list-view")
+	public String sortListView(Model model,
+			HttpSession session,
+			@RequestParam("league") String league) {
+		model.addAttribute("viewName", "home/home");
+		
+		List<Uniform> uniformList = uniformBO.getUniformListByLeague(league);
+		model.addAttribute("uniformList", uniformList);
+		return "template/layout";
+	}
 }

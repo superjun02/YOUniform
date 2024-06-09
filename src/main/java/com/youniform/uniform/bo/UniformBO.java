@@ -3,6 +3,7 @@ package com.youniform.uniform.bo;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,6 +98,23 @@ public class UniformBO {
 	public void updateUniformById(int id, String league, String subject, String description, int price, String status) {
 		String confirm = "Y";
 		uniformMapper.updateUniformById(id, league, subject, description, price, status, confirm);
+	}
+
+	public List<Uniform> getUniformListBySearch(String keyword) {
+		List<Uniform> uniformList = uniformMapper.selectUniformList();
+		
+		String lowerCaseKeyword = keyword.toLowerCase();
+		
+		List<Uniform> filteredList = uniformList.stream()
+	            .filter(uniform -> uniform.getSubject() != null &&
+	                               uniform.getSubject().toLowerCase().contains(lowerCaseKeyword))
+	            .collect(Collectors.toList());
+
+		return filteredList;
+	}
+
+	public List<Uniform> getUniformListByLeague(String league) {
+		return uniformMapper.selectUniformListByLeague(league);
 	}
 
 }
