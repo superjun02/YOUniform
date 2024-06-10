@@ -36,6 +36,7 @@
 	$(document).ready(function() {
 		$('.delBtn').on('click', function() {
 			let orderId = $(this).val();
+			event.stopPropagation();
 			
 			$.ajax({
 				type : 'POST',

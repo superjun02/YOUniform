@@ -55,8 +55,8 @@
 				},
 				success : function(data) {
 					if (data.code == 200) {
-						location.reload(true);
 						alert("장바구니에 추가되었습니다");
+						location.href = "/home/home-view"
 					} else {
 						alert(data.error_message);
 					}

@@ -16,7 +16,7 @@
 				<th class="col-1">번호</th>
 				<th class="col-1">
 					<select id="division" class="form-control-sm">
-						<option value="분류">분류</option>
+						<option value="">분류</option>
 						<option value="배송문의" <c:if test="${division == '배송문의'}">selected</c:if>>배송문의</option>
 						<option value="구매문의" <c:if test="${division == '구매문의'}">selected</c:if>>구매문의</option>
 						<option value="신청문의" <c:if test="${division == '신청문의'}">selected</c:if>>신청문의</option>
@@ -31,7 +31,7 @@
 		<tbody>
 			<c:forEach items="${postList}" var="post">
 				<tr class="clickable-row" data-href="/enquiry/enquiry-detail-view?id=${post.enquiry.id}&userId=${post.enquiry.userId}">
-					<td>${post.num}</td>
+					<td>${post.enquiry.id}</td>
 					<td>${post.enquiry.division}</td>
 					<td>
 						${post.enquiry.subject}
@@ -45,16 +45,35 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<nav aria-label="Page navigation">
+	    <ul class="pagination justify-content-center">
+	        <c:if test="${pageInfo.hasPreviousPage}">
+	            <li class="page-item">
+	                <a class="page-link" href="/enquiry/enquiry-list-view?division=${division}&page=${currentPage - 1}" aria-label="Previous">
+	                    <span aria-hidden="true">&laquo;</span>
+	                </a>
+	            </li>
+	        </c:if>
+	        <c:forEach begin="1" end="${totalPages}" var="i">
+	            <li class="page-item <c:if test='${currentPage == i}'>active</c:if>">
+	                <a class="page-link" href="/enquiry/enquiry-list-view?division=${division}&page=${i}">${i}</a>
+	            </li>
+	        </c:forEach>
+	        <c:if test="${pageInfo.hasNextPage}">
+	            <li class="page-item">
+	                <a class="page-link" href="/enquiry/enquiry-list-view?division=${division}&page=${currentPage + 1}" aria-label="Next">
+	                    <span aria-hidden="true">&raquo;</span>
+	                </a>
+	            </li>
+	        </c:if>
+	    </ul>
+	</nav>
 </div>
 <script>
 	$(document).ready(function() {
 		$('#division').on('change', function() {
 			let division = $('#division').val();
-			
-			if (division === '분류') {
-				location.href = "/enquiry/enquiry-list-view";
-				return;
-			}
 			location.href = "/enquiry/enquiry-list-view?division=" + division;
 		});
 		

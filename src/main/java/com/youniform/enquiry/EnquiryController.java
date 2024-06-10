@@ -1,7 +1,5 @@
 package com.youniform.enquiry;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageInfo;
+import com.youniform.enquiry.bo.EnquiryBO;
 import com.youniform.enquiry.bo.PostBO;
 import com.youniform.enquiry.domain.Post;
 
@@ -20,22 +20,43 @@ public class EnquiryController {
 	@Autowired
 	private PostBO postBO;
 	
+	@Autowired
+	private EnquiryBO enquiryBO;
+	
 	@GetMapping("/enquiry-list-view")
 	public String enquiryListView(Model model,
 			HttpSession session,
-			@RequestParam(value="division", required = false) String division) {
+			@RequestParam(value="division", required = false) String division,
+			@RequestParam(value="page", defaultValue = "1") int page,
+            @RequestParam(value="pageSize", defaultValue = "5") int pageSize) {
 		model.addAttribute("viewName", "enquiry/enquiryList");
 		
 		Integer userId = (Integer) session.getAttribute("userId");
-		
+	
 		if (userId == null) {
 			return "redirect:/home/home-view";
 		}
+
+		int totalItems = enquiryBO.getTotalItemsByDivision(division, userId);	
 		
-		List<Post> postlist = postBO.getPostListByUserId(division, userId);
+		Integer totalPages = totalItems / pageSize;
 		
-		model.addAttribute("postList", postlist);
-		model.addAttribute("division", division);
+	    if (totalItems % pageSize != 0) {
+	        totalPages++;
+	    }
+		
+		if (page < 1) {
+	        page = 1;
+	    } else if (page > totalPages) {
+	        page = totalPages;
+	    }
+		
+		PageInfo<Post> pageInfo = postBO.getPostListByUserId(division, userId, page, pageSize);
+        model.addAttribute("postList", pageInfo.getList());
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("division", division);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
 		
 		return "template/layout";
 	}

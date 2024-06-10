@@ -22,4 +22,8 @@ public class EnquiryBO {
 		enquiryMapper.deleteEnquiryById(id);
 	}
 
+	public int getTotalItemsByDivision(String division, Integer userId) {
+		return enquiryMapper.selectTotalItemsByDivision(division, userId);
+	}
+
 }

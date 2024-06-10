@@ -29,5 +29,11 @@ public interface EnquiryMapper {
 			@Param("id") int id);
 
 	public void deleteEnquiryById(int id);
+
+	public int selectTotalItems(Integer userId);
 	
+	public int selectTotalItemsByDivision(
+			@Param("division") String division,
+			@Param("userId") Integer userId);
+
 }

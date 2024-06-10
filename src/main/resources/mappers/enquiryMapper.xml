@@ -34,12 +34,16 @@
 			,`updatedAt`
 		FROM 	
 			`enquiry`
-		WHERE
+		<where>
+		<if test="division != ''">
+			AND
 			`division` = #{division}
+		</if>
 		<if test="userId != 1">
 			AND
 				`userId` = #{userId}
 		</if>
+		</where>
 		ORDER BY
 			`id`
 		DESC
@@ -95,4 +99,20 @@
  		WHERE
  			`id` = #{id}
  	</delete>
+ 	<select id="selectTotalItemsByDivision" resultType="int" parameterType="map">
+ 		SELECT
+ 			COUNT(*)
+		FROM 	
+			`enquiry`
+		<where>
+		<if test="division != ''">
+			AND
+			`division` = #{division}
+		</if>
+		<if test="userId != 1">
+			AND
+				`userId` = #{userId}
+		</if>
+		</where>
+ 	</select>
  </mapper>

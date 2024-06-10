@@ -1,12 +1,13 @@
 package com.youniform.enquiry.bo;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youniform.enquiry.domain.Enquiry;
 import com.youniform.enquiry.domain.Post;
 import com.youniform.enquiry.mapper.EnquiryMapper;
@@ -21,35 +22,26 @@ public class PostBO {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<Post> getPostListByUserId(String division, Integer userId) {
-		List<Post> postList = new ArrayList<>();
-		
-		List<Enquiry> enquiryList = new ArrayList<>();
-		
-		if (division == null) {
-			enquiryList = enquiryMapper.selectEnquiryListByUserId(userId);
-		} else {
-			enquiryList = enquiryMapper.selectEnquiryListByDivisionAndUserId(division, userId);
-		}
-		
-		int num = enquiryList.size();
-		
-		Iterator<Enquiry> iter = enquiryList.iterator();
-		
-		while (iter.hasNext()) {
-			Post post = new Post();
-			
-			Enquiry enquiry = iter.next();
-			UserEntity user = userRepository.findById(enquiry.getUserId()).orElse(null);
-			post.setNum(num--);
-			post.setEnquiry(enquiry);
-			post.setUserId(user.getLoginId());
-			
-			postList.add(post);
-		}
-		
-		return postList;
-	}
+	public PageInfo<Post> getPostListByUserId(String division, Integer userId, int page, int pageSize) {
+        PageHelper.startPage(page, pageSize);
+        
+        List<Enquiry> enquiryList = enquiryMapper.selectEnquiryListByDivisionAndUserId(division, userId);
+        
+        List<Post> postList = new ArrayList<>();
+        
+        for (Enquiry enquiry : enquiryList) {
+            Post post = new Post();
+            
+            UserEntity user = userRepository.findById(enquiry.getUserId()).orElse(null);
+            post.setEnquiry(enquiry);
+            post.setUserId(user != null ? user.getLoginId() : null);
+            
+            postList.add(post);
+        }
+        
+        PageInfo<Post> pageInfo = new PageInfo<>(postList);
+        return pageInfo;
+    }
 
 	public Post getPostById(int id) {
 		Post post = new Post();
