@@ -57,7 +57,7 @@
 				success : function(data) {
 					if (data.code == 200) {
 						alert("작성이 완료되었습니다");
-						location.href = "/enquiry/enquiry-list-view?division=";
+						location.href = "/enquiry/enquiry-list-view";
 					} else {
 						alert(data.error_message);
 					}
