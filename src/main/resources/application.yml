@@ -25,11 +25,11 @@ spring:
     properties:
       hibernate: 
         format_sql: true
+  config:
+    import: token.yml
+  activate: on-profile=real
 mybatis:
   mapper-locations: mappers/*Mapper.xml
-telegram:
-  bot:
-    token: 6764323381:AAEb8KAHfL65674wmyvV4z6X0msi8ieSpQc
 pagehelper:
   helperDialect: mysql
   reasonable: true
