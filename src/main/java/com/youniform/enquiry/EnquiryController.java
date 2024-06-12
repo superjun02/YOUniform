@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageInfo;
+import com.youniform.common.DataSizeChecker;
 import com.youniform.enquiry.bo.EnquiryBO;
 import com.youniform.enquiry.bo.PostBO;
 import com.youniform.enquiry.domain.Post;
@@ -22,6 +23,9 @@ public class EnquiryController {
 	
 	@Autowired
 	private EnquiryBO enquiryBO;
+	
+	@Autowired
+	private DataSizeChecker sizeChecker;
 	
 	@GetMapping("/enquiry-list-view")
 	public String enquiryListView(Model model,
@@ -39,7 +43,7 @@ public class EnquiryController {
 
 		int totalItems = enquiryBO.getTotalItemsByDivision(division, userId);	
 		
-		Integer totalPages = totalItems / pageSize;
+		Integer totalPages = sizeChecker.getTotalPages(totalItems, pageSize);
 		
 	    if (totalItems % pageSize != 0) {
 	        totalPages++;
