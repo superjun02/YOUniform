@@ -45,10 +45,6 @@ public class EnquiryController {
 		
 		Integer totalPages = sizeChecker.getTotalPages(totalItems, pageSize);
 		
-	    if (totalItems % pageSize != 0) {
-	        totalPages++;
-	    }
-		
 		if (page < 1) {
 	        page = 1;
 	    } else if (page > totalPages) {

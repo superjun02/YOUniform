@@ -6,7 +6,13 @@ import org.springframework.stereotype.Service;
 public class DataSizeChecker {
 
 	public Integer getTotalPages(int totalItems, int pageSize) {
-		return totalItems / pageSize;
+		Integer totalPages = totalItems / pageSize;
+
+		if (totalItems % pageSize != 0) {
+			totalPages++;
+		}
+		
+		return totalPages;
 	}
-	
+
 }
