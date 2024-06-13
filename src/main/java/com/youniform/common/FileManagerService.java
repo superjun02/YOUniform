@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class FileManagerService {
-	public static final String FILE_UPLOAD_PATH = "C:\\이상준\\6_spring_project\\youniform\\youniform_workspace\\images/"; // 학원용
-	// public static final String FILE_UPLOAD_PATH = "C:\\이상준\\6_spring_project\\sns\\sns_workspace\\images/"; // 집용
+	// public static final String FILE_UPLOAD_PATH = "C:\\이상준\\6_spring_project\\youniform\\youniform_workspace\\images/";
+	public static final String FILE_UPLOAD_PATH = "/home/ec2-user/images/";
 	
 	public String saveFile(String loginId, MultipartFile file) {
 		String directoryName = loginId + "_" + System.currentTimeMillis() + "/";
@@ -28,7 +28,6 @@ public class FileManagerService {
 		
 		try {
 			byte[] bytes = file.getBytes();
-			// ★★★★ 한글명 파일은 업로드 불가이므로 나중에 영문자로 바꾸기
 			Path path = Paths.get(filePath + file.getOriginalFilename());
 			Files.write(path, bytes);
 		} catch (IOException e) {
