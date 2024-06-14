@@ -10,9 +10,7 @@ header {
 .top-nav:hover {
 	background-color: #77B856;
 }
-.contents {
-	min-height: 500px;
-}
+
 .left-side {
 	width: 165px;
 }

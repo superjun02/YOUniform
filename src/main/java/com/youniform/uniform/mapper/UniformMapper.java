@@ -39,4 +39,8 @@ public interface UniformMapper {
 
 	public List<Uniform> selectUniformListByLeague(String league);
 
+	public int selectTotalItems();
+
+	public int selectTotalItemsByLeague(String league);
+
 }

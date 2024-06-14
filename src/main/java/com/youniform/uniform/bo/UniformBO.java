@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youniform.basket.domain.Basket;
 import com.youniform.basket.mapper.BasketMapper;
 import com.youniform.common.FileManagerService;
@@ -31,8 +33,13 @@ public class UniformBO {
 	@Autowired
 	private FileManagerService fileManager; 
 	
-	public List<Uniform> getUniformList() {
-		return uniformMapper.selectUniformList();
+	public PageInfo<Uniform> getUniformList(int page, int pageSize) {
+		PageHelper.startPage(page, pageSize);
+		
+		List<Uniform> uniformList = uniformMapper.selectUniformList();
+		
+		PageInfo<Uniform> pageInfo = new PageInfo<>(uniformList);
+        return pageInfo;
 	}
 
 	public Uniform getUniformById(int id) {
@@ -113,8 +120,20 @@ public class UniformBO {
 		return filteredList;
 	}
 
-	public List<Uniform> getUniformListByLeague(String league) {
-		return uniformMapper.selectUniformListByLeague(league);
+	public PageInfo<Uniform> getUniformListByLeague(String league, int page, int pageSize) {
+		PageHelper.startPage(page, pageSize);
+		List<Uniform> uniformList = uniformMapper.selectUniformListByLeague(league);
+		 
+		PageInfo<Uniform> pageInfo = new PageInfo<>(uniformList);
+        return pageInfo;
+	}
+
+	public int getTotalItems() {
+		return uniformMapper.selectTotalItems();
+	}
+
+	public int getTotalItemsByLeague(String league) {
+		return uniformMapper.selectTotalItemsByLeague(league);
 	}
 
 }
