@@ -21,3 +21,54 @@
 		</a>
 	</c:forEach>
 </div>
+
+<div class="pt-4">
+	<c:if test="${empty league}">
+		<nav aria-label="Page navigation" class>
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageInfo.hasPreviousPage}">
+					<li class="page-item"><a class="page-link"
+						href="/home/home-view?page=${currentPage - 1}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages}" var="i">
+					<li class="page-item <c:if test='${currentPage == i}'>active</c:if>">
+						<a class="page-link"
+						href="/home/home-view?page=${i}">${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageInfo.hasNextPage}">
+					<li class="page-item"><a class="page-link"
+						href="/home/home-view?page=${currentPage + 1}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
+			</ul>
+		</nav>
+	</c:if>
+	<c:if test="${not empty league}">
+		<nav aria-label="Page navigation" class>
+			<ul class="pagination justify-content-center">
+				<c:if test="${pageInfo.hasPreviousPage}">
+					<li class="page-item"><a class="page-link"
+						href="/uniform/sort-list-view?league=${league}&page=${currentPage - 1}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages}" var="i">
+					<li class="page-item <c:if test='${currentPage == i}'>active</c:if>">
+						<a class="page-link"
+						href="/uniform/sort-list-view?league=${league}&page=${i}">${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageInfo.hasNextPage}">
+					<li class="page-item"><a class="page-link"
+						href="/uniform/sort-list-view?league=${league}&page=${currentPage + 1}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
+			</ul>
+		</nav>
+	</c:if>
+</div>

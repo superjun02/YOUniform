@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageInfo;
+import com.youniform.common.DataSizeChecker;
 import com.youniform.uniform.bo.RequestBO;
 import com.youniform.uniform.bo.UniformBO;
 import com.youniform.uniform.domain.Request;
@@ -24,6 +26,9 @@ public class UniformController {
 	
 	@Autowired
 	private RequestBO requestBO;
+	
+	@Autowired
+	private DataSizeChecker sizeChecker;
 	
 	@GetMapping("/detail-view")
 	public String homeView(Model model,
@@ -97,11 +102,28 @@ public class UniformController {
 	@GetMapping("sort-list-view")
 	public String sortListView(Model model,
 			HttpSession session,
-			@RequestParam("league") String league) {
+			@RequestParam("league") String league,
+			@RequestParam(value="page", required = false, defaultValue = "1") int page,
+            @RequestParam(value="pageSize", required = false, defaultValue = "18") int pageSize) {
 		model.addAttribute("viewName", "home/home");
 		
-		List<Uniform> uniformList = uniformBO.getUniformListByLeague(league);
-		model.addAttribute("uniformList", uniformList);
+		int totalItems = uniformBO.getTotalItemsByLeague(league);
+		
+		Integer totalPages = sizeChecker.getTotalPages(totalItems, pageSize);
+		
+		if (page < 1) {
+	        page = 1;
+	    } else if (page > totalPages) {
+	        page = totalPages;
+	    }
+		
+		PageInfo<Uniform> pageInfo = uniformBO.getUniformListByLeague(league, page, pageSize);
+		
+		model.addAttribute("league", league);
+		model.addAttribute("uniformList", pageInfo.getList());
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
 		return "template/layout";
 	}
 }

@@ -134,4 +134,18 @@
 			`id`
 		DESC
  	</select>
+ 	<select id="selectTotalItems" resultType="int">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`uniform`	
+ 	</select>
+ 	<select id="selectTotalItemsByLeague" resultType="int">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`uniform`	
+ 		WHERE 
+ 			`league` = #{league}
+ 	</select>
  </mapper>

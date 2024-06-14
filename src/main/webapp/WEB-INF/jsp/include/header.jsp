@@ -7,11 +7,11 @@
 		<a href="/home/home-view" class="text-decoration-none text-success"><h1>YOUniform</h1></a>
 	</div>
 	<div class="col-5">
-		<div class="d-flex">
-			<input class="form-control" id="keyword" type="search" placeholder="제품 입력">
-   	 		<button id="searchBtn" class="btn btn-outline-success" type="button">search</button>
-		</div>
-	</div>
+        <form class="d-flex w-100" id="searchForm" action="/uniform/search-list-view" method="get" onsubmit="return validateForm()">
+            <input class="form-control flex-grow-1" id="keyword" name="keyword" type="search" placeholder="제품 입력">
+            <button id="searchBtn" class="btn btn-outline-success" type="submit">search</button>
+        </form>
+    </div>
 	
 	<%-- login 정보 --%>
 	<div class="pr-3 col-3 d-flex justify-content-end">
@@ -24,17 +24,3 @@
 		</c:if>
 	</div>
 </div>
-<script>
-	$(document).ready(function() {
-		$('#searchBtn').on('click', function() {
-			let keyword = $('#keyword').val().trim();
-			
-			if (!keyword) {
-				alert("검색어를 입력해주세요");
-				return;
-			}
-		
-			location.href = "/uniform/search-list-view?keyword=" + keyword;
-		});
-	});
-</script>
