@@ -102,7 +102,7 @@ public class UniformBO {
 		return uniformList;
 	}
 
-	public void updateUniformById(int id, String league, String subject, String description, int price, String status) {
+	public void updateUniformById(int id, String league, String subject, int price, String description, String status) {
 		String confirm = "Y";
 		uniformMapper.updateUniformById(id, league, subject, description, price, status, confirm);
 	}

@@ -25,6 +25,9 @@
 			<div class="mt-5">
 				<button id="deleteBtn" class="w-100 btn btn-danger" value="${uniform.id}">삭제하기</button>
 			</div>
+			<div class="mt-1">
+				<button id="updateBtn" class="w-100 btn btn-primary" value="${uniform.id}">수정하기</button>
+			</div>
 		</c:if>
 	</div>
 </div>
@@ -88,6 +91,11 @@
 					alert("삭제를 하는데 실패했습니다.");
 				}
 			});
+		});
+		
+		$('#updateBtn').on('click', function() {
+			let uniformId = $(this).val();
+			location.href = "/uniform/update-view?id=" + uniformId;
 		});
 	})
 </script>

@@ -40,6 +40,16 @@ public class UniformController {
 		return "template/layout";
 	}
 	
+	@GetMapping("/update-view")
+	public String updateView(Model model,
+			@RequestParam("id") int id) {
+		model.addAttribute("viewName", "uniform/update");
+		
+		Uniform uniform = uniformBO.getUniformById(id);
+		model.addAttribute("uniform", uniform);
+		return "template/layout";
+	}
+	
 	@GetMapping("/request-view")
 	public String requestView(Model model,
 			HttpSession session) {

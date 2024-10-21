@@ -63,6 +63,25 @@ public class UniformRestController {
 		return result;
 	}
 	
+	@PostMapping("/update")
+	public Map<String, Object> update(
+			@RequestParam("league") String league,
+			@RequestParam("subject") String subject,
+			@RequestParam("price") int price,
+			@RequestParam("description")  String description,
+			@RequestParam("status") String status,
+			@RequestParam("id") int id,
+			HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		
+		uniformBO.updateUniformById(id, league, subject, price, description, status);
+		
+		result.put("code", 200);
+		result.put("id", id);
+
+		return result;
+	}
+	
 	@PostMapping("/accept")
 	public Map<String, Object> accept(
 			@RequestParam("league") String league,
@@ -74,7 +93,7 @@ public class UniformRestController {
 			HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		
-		uniformBO.updateUniformById(id, league, subject, description, price, status);
+		uniformBO.updateUniformById(id, league, subject, price, description, status);
 		result.put("code", 200);
 		result.put("result", "성공");
 		
